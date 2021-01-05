@@ -4,6 +4,7 @@ import { renderWithReduxRouter } from '../../testUtils';
 import ImagesTable from '../../../SmartComponents/ImagesTable/ImagesTable';
 import ImageBuildStatus from '../../../PresentationalComponents/ImageBuildStatus/ImageBuildStatus';
 import '@testing-library/jest-dom';
+import api from '../../../api.js';
 
 const store = {
     composes: {
@@ -30,6 +31,8 @@ const store = {
 
 describe('Images Table', () => {
     beforeEach(() => {
+        const getComposeStatus = jest.spyOn(api, 'getComposeStatus');
+        getComposeStatus.mockResolvedValue({ status: 'success' });
         renderWithReduxRouter(<ImagesTable />, store);
     });
 
